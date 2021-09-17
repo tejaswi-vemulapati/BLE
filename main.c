@@ -32,12 +32,12 @@ float sum_array_float(float a[], int s){
 
 void print_array_integer(int a[], int s){
   for(int i = 0; i < s; i++){
-    printf("%d\n", a[i]);
+    printf("integer[%d] = %d\n", i, a[i]);
   }
 }
 void print_array_float(float a[], int s){
   for(int i = 0; i < s; i++){
-    printf("%0.3f\n", a[i]);
+    printf("integer[%d] = %0.3f\n", i, a[i]);
   }
 }
 
@@ -66,7 +66,7 @@ void selection_sort_float(float a[], int s){
 	      currMin = j;
       }
     }
-    int z = a[currMin];
+    float z = a[currMin];
     a[currMin] = a[i];
     a[i] = z;
   }
@@ -181,15 +181,36 @@ int main(int argc, char *argv[]) {
 
 	// Local variables
 	// NOTE: this is where you will want to add some new variables
-	float f_array[20];
+	float f_array[20] = {20.23,
+  1.0,
+28.6,
+25.29,
+26.19,
+4.8,
+12.10,
+26.30,
+0.7,
+8.8,
+25.0,
+9.23,
+0.30,
+22.17,
+9.12,
+23.6,
+1.16,
+1.20,
+14.5,
+11.3};
 	int i_array[20];
-        int i;
+  int i;
 
 	// First, lets read in the float numbers to process
+
+  /*
 	for (i=0; i<20; i++) {
 		scanf("%f", &f_array[i]);
 	}
-
+  */
 	// Convert the float arrays 
 	for(int b = 0; b < 20; b++){
 	  if(f_array[b] >= 10){
@@ -210,32 +231,41 @@ int main(int argc, char *argv[]) {
 	    i_array[c] = r;
 	  }
 	}
-
+  printf("The array of floats: ");
 	print_array_float(f_array, 20);
+  printf("The array of integers: ");
 	print_array_integer(i_array, 20);
 	
 	float sumFloat = sum_array_float(f_array, 20);
 	int sumInt = sum_array_integer(i_array, 20);
-	printf("%d", sumInt);
-	printf("%f", sumFloat);
+  printf("The sum of the array of floats is %0.3f\n", sumFloat);
+	printf("The sum of the array of integers is %d\n", sumInt);
 
 	
 	// Get gcd of adjacent elements
 	for(int a = 0; a < 19; a+=1){
 	  int g = euclids_algorithm(i_array[a], i_array[a+1]);
-	  printf("%d", g);
+	  printf("GCD(%d, %d) = %d\n", i_array[a], i_array[a+1], g);
 	}
 
 	//Selection Sort
 	selection_sort_integer(i_array, 20);
 	selection_sort_float(f_array, 20);
-	
+	printf("The sorted array of floats: ");
 	print_array_float(f_array, 20);
+  printf("The sorted array of integers: ");
 	print_array_integer(i_array, 20);
 
 	//Sin Function
-	float c = 1.0;
-	graph_sin(c);
+  printf("Graph of y = sin(1.0 * x)\n");
+	graph_sin(1.0);
+  printf("Graph of y = sin(1.5 * x)\n");
+	graph_sin(1.5);
+  printf("Graph of y = sin(2.0 * x)\n");
+	graph_sin(2.0);
+  printf("Graph of y = sin(3.0 * x)\n");
+	graph_sin(3.0);
+
 	// Return successfully
 	return(0);
 }
