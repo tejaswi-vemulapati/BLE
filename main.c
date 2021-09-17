@@ -1,12 +1,12 @@
 #include <stdio.h>
-
+#include <math.h>
 
 int euclids_algorithm(int a, int b){
   if(b%a == 0){
     return a;
   }
   else{
-    return euclid(b%a, a);
+    return euclids_algorithm(b%a, a);
   }
 }
 
@@ -211,27 +211,27 @@ int main(int argc, char *argv[]) {
 	  }
 	}
 
-	printArrayFloat(f_array, 20);
-	printArrayInt(i_array, 20);
+	print_array_float(f_array, 20);
+	print_array_integer(i_array, 20);
 	
-	float sumFloat = find_sum_float(f_array, 20);
-	int sumInt = find_sum_int(i_array, 20);
+	float sumFloat = sum_array_float(f_array, 20);
+	int sumInt = sum_array_integer(i_array, 20);
 	printf("%d", sumInt);
 	printf("%f", sumFloat);
 
 	
 	// Get gcd of adjacent elements
 	for(int a = 0; a < 19; a+=1){
-	  int g = gcd(i_array[a], i_array[a+1]);
+	  int g = euclids_algorithm(i_array[a], i_array[a+1]);
 	  printf("%d", g);
 	}
 
 	//Selection Sort
-	selectionSortInt(i_array, 20);
-	selectionSortFloat(f_array, 20);
+	selection_sort_integer(i_array, 20);
+	selection_sort_float(f_array, 20);
 	
-	printArrayFloat(f_array, 20);
-	printArrayInt(i_array, 20);
+	print_array_float(f_array, 20);
+	print_array_integer(i_array, 20);
 
 	//Sin Function
 	float c = 1.0;
@@ -241,7 +241,6 @@ int main(int argc, char *argv[]) {
 }
 
 /*
-
   1.5 |                                                                        
   1.4 |                                                                        
   1.3 |                                                                        
@@ -277,9 +276,7 @@ int main(int argc, char *argv[]) {
  */
 
 /*
-
 Use Grid 
 x[]
 y[]
-
  */
