@@ -87,16 +87,28 @@ float myround(float x) {
   float x4 = x3*10;
   if(x4 >= 5){
     if(oX < 0){
-      return floor(oX);
+      return oX-1;
     }
-    return ceil(oX);
+    return oX+1;
   }
-  if(oX < 0){
-    return ceil(oX);
-  }
-  return floor(oX);
+  return oX;
 }
-
+float myround2(float x){
+  float x7 = x/10;
+  float oX = x7*10;
+  float x1 = myabs(x7)*10;
+  int x2 = myabs(x7)*10;
+  float x3 = x1- (float)x2;
+  float x4 = x3*10;
+  printf("%f\n", x4);
+  if(x4 >= 5){
+    if(oX < 0){
+      return (oX-1);
+    }
+    return (oX+1);
+  }
+  return oX;
+}
 void graph_sin(float c){
   //Four Quadrants of Graph
   char gridPos[11][36];
@@ -211,6 +223,7 @@ int main(int argc, char *argv[]) {
 		scanf("%f", &f_array[i]);
 	}
   */
+  //printf("%f", myround2(63.554));
 	// Convert the float arrays 
 	for(int b = 0; b < 20; b++){
 	  if(f_array[b] >= 10){
@@ -223,7 +236,7 @@ int main(int argc, char *argv[]) {
 
 	// Make the integer array
 	for(int c = 0; c < 20; c++){
-	  int r = roundf(f_array[c]);
+	  int r = (int) myround2(f_array[c]);
 	  if(r < 0){
 	    i_array[c] = 0 - r;
 	  }
@@ -270,43 +283,3 @@ int main(int argc, char *argv[]) {
 	return(0);
 }
 
-/*
-  1.5 |                                                                        
-  1.4 |                                                                        
-  1.3 |                                                                        
-  1.2 |                                                                        
-  1.1 |                                                                        
-  1.0 |                                                 ******                 
-  0.9 |                                               **      ***              
-  0.8 |                                             **           *             
-  0.7 |                                            *              **           
-  0.6 |                                          **                 *          
-  0.5 |                                         *                    *         
-  0.4 | *                                      *                      *        
-  0.3 |  *                                    *                        *       
-  0.2 |   *                                  *                          *      
-  0.1 |    *                                *                            *     
- -0.0 |     *                              *                              *    
- -0.1 |      *                            *                                *   
- -0.2 |       *                          *                                  *  
- -0.3 |        *                        *                                    * 
- -0.4 |         *                      *                                      *
- -0.5 |          *                    *                                        
- -0.6 |           *                 **                                         
- -0.7 |            **              *                                           
- -0.8 |              *           **                                            
- -0.9 |               ***      **                                              
- -1.0 |                  ******                                                
- -1.1 |                                                                        
- -1.2 |                                                                        
- -1.3 |                                                                        
- -1.4 |                                                 *    *                   
-       -----------------------------------------------------------------------
-           -3        -2        -1        -0         1         2         3     
- */
-
-/*
-Use Grid 
-x[]
-y[]
- */
