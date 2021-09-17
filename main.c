@@ -1,0 +1,285 @@
+#include <stdio.h>
+
+
+int euclids_algorithm(int a, int b){
+  if(b%a == 0){
+    return a;
+  }
+  else{
+    return euclid(b%a, a);
+  }
+}
+
+int sum_array_integer(int a[], int s){
+  int sum = 0;
+  for(int i = 0; i < s; i++){
+    sum = sum + a[i];
+  }
+  return sum;
+}
+
+float sum_array_float(float a[], int s){
+  float sum = 0.0;
+  for(int i = 0; i < s; i++){
+    sum = sum + a[i];
+  }
+  return sum;
+}
+
+
+
+// Print Array
+
+void print_array_integer(int a[], int s){
+  for(int i = 0; i < s; i++){
+    printf("%d\n", a[i]);
+  }
+}
+void print_array_float(float a[], int s){
+  for(int i = 0; i < s; i++){
+    printf("%0.3f\n", a[i]);
+  }
+}
+
+void selection_sort_integer(int a[], int s){
+  //Outer loop repeating process for all s elements
+  for(int i = 0; i < s-1; i++){
+    int currMin = i;
+    
+    for(int j = i+1; j < s; j++){
+      //Inner Loop keeps track of current minimum
+      if(a[j] < a[currMin]){
+	      currMin = j;
+      }
+    }
+    //Swap
+    int z = a[currMin];
+    a[currMin] = a[i];
+    a[i] = z;
+  }
+}
+void selection_sort_float(float a[], int s){
+  for(int i = 0; i < s-1; i++){
+    int currMin = i;
+    for(int j = i+1; j < s; j++){
+      if(a[j] < a[currMin]){
+	      currMin = j;
+      }
+    }
+    int z = a[currMin];
+    a[currMin] = a[i];
+    a[i] = z;
+  }
+}
+
+float myabs(float a){
+  if (a >= 0.0){
+    return a;
+  }
+  return 0.0-a;
+}
+
+float myround(float x) {
+  float oX = x*10;
+  float x1 = myabs(x)*10;
+  int x2 = myabs(x)*10;
+  float x3 = x1- (float)x2;
+  float x4 = x3*10;
+  if(x4 >= 5){
+    if(oX < 0){
+      return floor(oX);
+    }
+    return ceil(oX);
+  }
+  if(oX < 0){
+    return ceil(oX);
+  }
+  return floor(oX);
+}
+
+void graph_sin(float c){
+  //Four Quadrants of Graph
+  char gridPos[11][36];
+  char gridNeg[11][36];
+  char gridPos2[11][36];
+  char gridNeg2[11][36];
+
+  //Init with spaces
+  for(int y = 0; y < 11; y++){
+    for(int x = 0; x < 36; x++){
+      gridPos[y][x] = ' ';
+      gridPos2[y][x] = ' ';
+      gridNeg[y][x] = ' ';
+      gridNeg2[y][x] = ' ';
+    }
+  }
+
+  //Left Half Evaluate
+  for(int x1 = 0; x1 < 36; x1++){
+    float x = x1*0.1;
+    float y = sin(c*x);
+    int y1 = (int) myround(y);
+    if(y1 > 0){
+      gridPos[y1][x1] = '*';
+    }
+    else{
+      y1 = 0 - y1;
+      gridNeg[y1][x1] = '*';
+    }
+  }
+  //Right Half Evaluate
+  for(int x1 = 0; x1 < 36; x1++){
+    float x = x1*-0.1;
+    float y = sin(c*x);
+    int y1 = (int) myround(y);
+    if(y1 > 0){
+      gridPos2[y1][x1] = '*';
+    }
+    else{
+      y1 = 0 - y1;
+      gridNeg2[y1][x1] = '*';
+    }
+  }
+  
+  // Print graph
+  printf("\n1.50|\n1.40|\n1.30|\n1.20|\n1.10|\n");
+  //Top Half
+  for(int y = 10; y > 0; y--){
+    float y1 = y*0.1;
+    printf("%0.2f|", y1);
+    for(int x = 35; x > 0; x--){//Left Half
+      printf("%c", gridPos2[y][x]);
+
+    }
+    for(int x = 0; x < 36; x++){//Right Half
+      printf("%c", gridPos[y][x]);
+    }
+
+	  
+    printf("\n");
+  }
+  //Bottom Half
+  for(int y = 0; y < 11; y++){
+    float y1 = y*0.1;
+    printf("-%0.1f|", y1);
+    for(int x = 35; x > 0; x--){//Left Half
+      printf("%c", gridNeg2[y][x]);
+    }
+    for(int x = 0; x < 36; x++){//Right Half
+      printf("%c", gridNeg[y][x]);
+    }
+    printf("\n");
+  }
+  printf("-1.1|\n-1.2|\n-1.3|\n-1.4|\n-1.5|\n");
+  
+  
+  printf("     ------------------------------------------------------------------------\n");
+  printf("         -3        -2        -1         0         1         2          3\n");
+  
+}
+int main(int argc, char *argv[]) {
+
+	// Local variables
+	// NOTE: this is where you will want to add some new variables
+	float f_array[20];
+	int i_array[20];
+        int i;
+
+	// First, lets read in the float numbers to process
+	for (i=0; i<20; i++) {
+		scanf("%f", &f_array[i]);
+	}
+
+	// Convert the float arrays 
+	for(int b = 0; b < 20; b++){
+	  if(f_array[b] >= 10){
+	    f_array[b] = f_array[b] * M_PI;
+	  }
+	  else{
+	    f_array[b] = f_array[b] * 8.4;
+	  }
+	}
+
+	// Make the integer array
+	for(int c = 0; c < 20; c++){
+	  int r = roundf(f_array[c]);
+	  if(r < 0){
+	    i_array[c] = 0 - r;
+	  }
+	  else{
+	    i_array[c] = r;
+	  }
+	}
+
+	printArrayFloat(f_array, 20);
+	printArrayInt(i_array, 20);
+	
+	float sumFloat = find_sum_float(f_array, 20);
+	int sumInt = find_sum_int(i_array, 20);
+	printf("%d", sumInt);
+	printf("%f", sumFloat);
+
+	
+	// Get gcd of adjacent elements
+	for(int a = 0; a < 19; a+=1){
+	  int g = gcd(i_array[a], i_array[a+1]);
+	  printf("%d", g);
+	}
+
+	//Selection Sort
+	selectionSortInt(i_array, 20);
+	selectionSortFloat(f_array, 20);
+	
+	printArrayFloat(f_array, 20);
+	printArrayInt(i_array, 20);
+
+	//Sin Function
+	float c = 1.0;
+	graph_sin(c);
+	// Return successfully
+	return(0);
+}
+
+/*
+
+  1.5 |                                                                        
+  1.4 |                                                                        
+  1.3 |                                                                        
+  1.2 |                                                                        
+  1.1 |                                                                        
+  1.0 |                                                 ******                 
+  0.9 |                                               **      ***              
+  0.8 |                                             **           *             
+  0.7 |                                            *              **           
+  0.6 |                                          **                 *          
+  0.5 |                                         *                    *         
+  0.4 | *                                      *                      *        
+  0.3 |  *                                    *                        *       
+  0.2 |   *                                  *                          *      
+  0.1 |    *                                *                            *     
+ -0.0 |     *                              *                              *    
+ -0.1 |      *                            *                                *   
+ -0.2 |       *                          *                                  *  
+ -0.3 |        *                        *                                    * 
+ -0.4 |         *                      *                                      *
+ -0.5 |          *                    *                                        
+ -0.6 |           *                 **                                         
+ -0.7 |            **              *                                           
+ -0.8 |              *           **                                            
+ -0.9 |               ***      **                                              
+ -1.0 |                  ******                                                
+ -1.1 |                                                                        
+ -1.2 |                                                                        
+ -1.3 |                                                                        
+ -1.4 |                                                 *    *                   
+       -----------------------------------------------------------------------
+           -3        -2        -1        -0         1         2         3     
+ */
+
+/*
+
+Use Grid 
+x[]
+y[]
+
+ */
